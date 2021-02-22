@@ -23,6 +23,7 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case RESTORE_TOKEN: {
+      console.warn('RESTORE_TOKEN');
       return {
         ...state,
         isSignout: true,

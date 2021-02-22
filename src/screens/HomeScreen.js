@@ -1,10 +1,8 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
-import AuthContext from '../contexts/AuthContext';
 
 function HomeScreen() {
-  const {signOut} = React.useContext(AuthContext);
-  if (!signOut) {
+  if (!true) {
     return (
       <View>
         <Text>TESTS</Text>
@@ -14,7 +12,12 @@ function HomeScreen() {
     return (
       <View>
         <Text>Signed in!</Text>
-        <Button title="Sign out" onPress={signOut} />
+        <Button
+          title="Sign out"
+          onPress={() => {
+            console.log('HDFSDFS');
+          }}
+        />
       </View>
     );
   }

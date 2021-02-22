@@ -1,35 +1,12 @@
 import * as React from 'react';
-import {Button, Text, TextInput, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from './screens/SplashScreen';
 import AuthContext from './contexts/AuthContext';
+
+import SplashScreen from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
-
-function SignInScreen() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const {signIn} = React.useContext(AuthContext);
-
-  return (
-    <View>
-      <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Sign in" onPress={() => signIn({username, password})} />
-    </View>
-  );
-}
+import SignInScreen from './screens/SignInScreen';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +15,7 @@ export default function App({navigation}) {
     (prevState, action) => {
       switch (action.type) {
         case 'RESTORE_TOKEN':
+          console.warn('RESTORE_TOKEN');
           return {
             ...prevState,
             userToken: action.token,
@@ -73,10 +51,11 @@ export default function App({navigation}) {
         userToken = await AsyncStorage.getItem('userToken');
       } catch (e) {
         // Restoring token failed
+        console.error(e);
       }
 
       // After restoring token, we may need to validate it in production apps
-
+      console.log('bootstrapAsync completed');
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
       dispatch({type: 'RESTORE_TOKEN', token: userToken});
@@ -92,10 +71,14 @@ export default function App({navigation}) {
         // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `AsyncStorage`
         // In the example, we'll use a dummy token
-
-        dispatch({type: 'SIGN_IN', token: 'dummy-auth-token'});
+        const token = 'dummy-auth-token';
+        await AsyncStorage.setItem('userToken', token);
+        dispatch({type: 'SIGN_IN', token: token});
       },
-      signOut: () => dispatch({type: 'SIGN_OUT'}),
+      signOut: async () => {
+        await AsyncStorage.removeItem('userToken');
+        dispatch({type: 'SIGN_OUT'});
+      },
       signUp: async (data) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed

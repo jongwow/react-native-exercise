@@ -4,18 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from './screens/SplashScreen';
-const AuthContext = React.createContext();
-
-function HomeScreen() {
-  const {signOut} = React.useContext(AuthContext);
-
-  return (
-    <View>
-      <Text>Signed in!</Text>
-      <Button title="Sign out" onPress={signOut} />
-    </View>
-  );
-}
+import AuthContext from './contexts/AuthContext';
+import HomeScreen from './screens/HomeScreen';
 
 function SignInScreen() {
   const [username, setUsername] = React.useState('');

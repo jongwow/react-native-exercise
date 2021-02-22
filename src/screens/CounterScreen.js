@@ -9,6 +9,11 @@ import {
   View,
 } from 'react-native';
 import {connect} from 'react-redux';
+import {
+  DEC_COUNTER,
+  DEC_COUNTER_ASYNC,
+  INC_COUNTER,
+} from '../redux/action/counterAction';
 
 const {height, width} = Dimensions.get('window');
 
@@ -24,6 +29,9 @@ class Counter extends Component {
           <Text style={styles.counterText}>{this.props.counter}</Text>
           <TouchableOpacity onPress={this.props.reduxDecCounter}>
             <Text style={styles.buttonText}>-</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.props.reduxDecImeCounter}>
+            <Text style={styles.buttonText2}>-</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -64,6 +72,12 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     marginRight: 40,
   },
+  buttonText2: {
+    fontFamily: 'System',
+    fontSize: 50,
+    fontWeight: '300',
+    color: '#DA5C59',
+  },
 });
 
 const mapStateToProps = (state) => {
@@ -77,14 +91,21 @@ const mapDispatchToProps = (dispatch) => {
     reduxIncCounter: () => {
       console.log('reduxIncCounter');
       dispatch({
-        type: 'INC_COUNTER',
+        type: INC_COUNTER,
         value: 1,
       });
     },
     reduxDecCounter: () => {
-      console.log('reduxDecCounter');
+      console.log('reduxDecCounter Async');
       dispatch({
-        type: 'DEC_COUNTER',
+        type: DEC_COUNTER_ASYNC,
+        value: 1,
+      });
+    },
+    reduxDecImeCounter: () => {
+      console.log('reduxDecCounter immediately');
+      dispatch({
+        type: DEC_COUNTER,
         value: 1,
       });
     },

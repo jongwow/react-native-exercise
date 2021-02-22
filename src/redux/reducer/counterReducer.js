@@ -1,16 +1,22 @@
+import {
+  DEC_COUNTER,
+  INC_COUNTER_ASYNC,
+  DEC_COUNTER_IMME,
+} from '../action/counterAction';
+
 const initialState = {
   counter: 0,
 };
 
 const counterReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'INC_COUNTER_ASYNC': {
+    case INC_COUNTER_ASYNC: {
       return {
         ...state,
         counter: state.counter + action.value,
       };
     }
-    case 'DEC_COUNTER_ASYNC': {
+    case DEC_COUNTER: {
       return {
         ...state,
         counter: state.counter - action.value,

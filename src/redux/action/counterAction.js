@@ -2,3 +2,4 @@ export const INC_COUNTER = 'INC_COUNTER';
 export const DEC_COUNTER = 'DEC_COUNTER';
 export const INC_COUNTER_ASYNC = 'INC_COUNTER_ASYNC';
 export const DEC_COUNTER_ASYNC = 'DEC_COUNTER_ASYNC';
+export const DEC_COUNTER_IMME = 'DEC_COUNTER_IMME';

@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RESTORE_TOKEN} from '../redux/action/authAction';
 
 export const bootstrapAsync = async () => {
+  //TODO: Action을 반환하는 것이 아니라 Token을 반환하도록 수정하기
   let userToken;
 
   try {

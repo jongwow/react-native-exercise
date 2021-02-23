@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import SplashScreen from './screens/SplashScreen';
 import SignInScreen from './screens/SignInScreen';
-import HomeScreen from './screens/HomeScreen';
+import HomeTabs from './screens/HomeTabs';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useDispatch, useSelector} from 'react-redux';
 import {bootstrapAsync} from './utilities/storage';
@@ -40,7 +40,7 @@ const Layout = () => {
         />
       ) : (
         // User is signed in
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={HomeTabs} />
       )}
     </Stack.Navigator>
   );

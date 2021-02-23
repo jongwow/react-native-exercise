@@ -20,3 +20,23 @@ export const bootstrapAsync = async () => {
   // screen will be unmounted and thrown away.
   return {type: RESTORE_TOKEN, token: userToken};
 };
+
+export const saveTokenToStorage = async (token) => {
+  try {
+    await AsyncStorage.setItem('userToken', token);
+    return true;
+  } catch (e) {
+    console.warn(e);
+    return false;
+  }
+};
+
+export const deleteTokenFromStorage = async () => {
+  try {
+    await AsyncStorage.removeItem('userToken');
+    return true;
+  } catch (e) {
+    console.warn(e);
+    return false;
+  }
+};

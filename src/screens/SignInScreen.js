@@ -1,9 +1,12 @@
 import React from 'react';
 import {Button, TextInput, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {signIn} from '../redux/action/authAction';
 
 function SignInScreen() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const dispatch = useDispatch();
 
   return (
     <View>
@@ -21,7 +24,7 @@ function SignInScreen() {
       <Button
         title="Sign in"
         onPress={() => {
-          alert('Sign In Message');
+          dispatch(signIn({username, password}));
         }}
       />
     </View>
